@@ -1,0 +1,57 @@
+﻿<!doctype html>
+<html>
+   <head>
+      <style>
+         body { width: 333px; height: 140px }
+         #res { height: 15px; font-size: 8pt; font-family: Meiryo; margin-left: 4px }
+         #add_tag { width: 100px }
+         a { font-size: 8pt; font-family: Meiryo; color: #666}
+         #add_url{ width: 250px; margin-right: 5px;}
+         .mainboxs{height: 25px;}
+         #ii { color: #666}
+         
+         #open_miilme_btn {cursor: default}
+         #option_btn{ cursor: default}
+         #pic {height: 96px; width: 96px; border: 1px solid #dcdcdc;}
+         #btns {height: 25px}
+         #g-d-btn {margin-top: -31px; margin-left: 263px;}
+         #mssg0 {margin-top: -60px; margin-left: 110px;}
+         #mgg0 {font-size: 9pt;
+                font-family: Meiryo;
+                margin-top: -28px;
+                width: 180px;
+                margin-left: 28px;
+                color: #666;
+               }
+         #g-d-btn-load {
+           margin-top: 6px;
+           margin-left: 10px;
+         }
+      </style>
+   <script src="https://apis.google.com/js/platform.js">{parsetags: 'explicit'}</script>
+   </head>
+   <body>
+   <div id="Container">
+     <div id="btns">
+       <img src="images/miil-btn.png" id='open_miilme_btn' title="ミイルページを開きます">
+       <img src="images/gochiphoto-btn.png" id='open_gochiphoto_btn' title="Google ごちそうフォトを開きます">
+       <img src="images/card-btn.png" id='card_btn' title="ごちそうカードを開きます">
+       <div id="g-d-btn">
+           <div id="savetodrive-div">
+               <img src="images/loading.gif" id="g-d-btn-load">
+           </div>
+       </div>
+     </div>
+     <br>
+     <img src="images/c.png" id="pic">
+     <br>
+     <div id="mssg0">
+        <img src="images/wait_e.png" id="mssg_icon_0">
+        <div id="mgg0">しばらくお待ちください...</div>
+     </div>
+   </div>
+   <input type="text" id="add_url" placeholder="取得中..." style="display:none">
+   <script src="popup.js"></script>
+   <script src = "build.js"></script>
+   </body>
+</html>

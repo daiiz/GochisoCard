@@ -1,0 +1,219 @@
+﻿<!doctype html>
+<html ng-app ng-csp>
+   <head>
+     <title>Settings - GochisoCard</title>
+     <style>
+     	  html,body {
+        height: 100%;
+        }
+        
+        html {
+        overflow-y:scroll;
+        }
+        
+        body {
+        font-family: Meiryo; 
+        font-size: 10pt;
+        margin: 0px;
+        background-color: #e5e5e5;
+        }
+        
+        .index {
+          border-radius: 10px;
+          font-size: 14pt;
+          width: 85%;
+          padding: 6px;
+          border: 1px solid #e5e5e5;
+          background-color: #fff;
+          margin-top: 5px;
+          cursor: pointer;
+        }
+        
+        .index:hover {
+          border: 1px solid #ccc;
+        }
+        
+        .main {
+        text-align: left;
+        width: 85%;
+        }
+        
+        .regend {
+        font-size: 9pt;
+        }
+        
+        hr {
+        border: solid 1px #ddd
+        }
+        
+        #itemArea {
+        }
+        .taginput { width: 200px; margin-left: 1px;margin-top: 10px;}
+        a { font-size: 10pt; font-family: Meiryo; color: #666}
+        .A {margin-left: 20px;}
+        .B {margin-left: 20px;}
+        
+        #panel {
+        
+        }
+        
+        textarea {
+        width: 99%;
+        height: 60px;
+        resize:none;
+        }
+        
+        .port {
+           font-size: 12pt;
+           font-weight: bold;
+        }
+        blockquote {
+         border-left: 4px solid #777;
+         padding: 0 15px;
+         color: #444;
+         margin: 15px 0;
+         font-family: Consolas, "Liberation Mono", Courier, monospace;
+         font-size: 11pt;
+        }
+        .cgdr {
+           text-decoration: underline;
+           cursor: pointer;
+           font-size: 8pt;
+        }
+        .g-d-btn {
+           margin-left: 110px;
+           margin-top: 5px;
+        }
+        .itemPanel {
+          
+        }
+     </style>
+     <script src="angular.js"></script>
+     <script src="ctx/jQuery.js"></script>
+     <!--script src="asynchronous.js"></script-->
+     <script src="https://apis.google.com/js/platform.js">{parsetags: 'explicit'}</script>
+   </head>
+   <body>
+   <br>
+   <br>
+   <center>
+   <div id='panel'>
+     <div class="index" id="i0">ユーザー設定</div>
+     <div class="main" id="m0" style="display: none">
+       <br>
+       ミイル(miil)で使用しているユーザー名: <input type="text" placeholder="取得中..." id='usrname_box'>
+       <button id='usrname_btn'>登録</button><button id='open_miil_page'>ミイルのページを開く</button>
+       <br>
+       <br>
+     </div>
+     <div class="index" id="i2">マイデータ</div>
+     <div class="main" id="m2" style="display: none">
+     <br>
+     GochisoCardでは、登録していただいた写真データ（URL、ごちそうタグ）をインポート/エクスポートすることができます。データのバックアップにご利用下さい。<!--br>
+     <a href="" target="_blank">GochisoView</a> を使うと、エクスポートされたデータを貼り付けるだけで、スマートフォンでもごちそうカードを見ることができます。-->
+     <br>
+     <br>
+     <span class="port">エクスポート</span>
+     <br>
+     GochisoCardに保存されている全ての写真のURLを、ごちそうタグとともにエクスポートします。エクスポートされたデータには、GochisoCardに登録していただいたユーザー名は含まれません。
+     <br>
+     <br>
+     <button id='export'>写真データをエクスポートする</button>　<input type='checkbox' id='q_rm'>エクスポート終了後に、GochisoCardに保存されているデータを全て削除する
+     <br>
+     <textarea id='export_area' placeholder="ここにデータが表示されます" readOnly=true></textarea>
+     <br>
+     <br>
+     <hr>
+     <span class="port">インポート</span>
+     <br>
+     エクスポートされたデータをコピーして、下のテキストボックスに貼り付けて下さい。写真のURLがごちそうタグとともにGochisoCardに保存されます。
+     <br>
+     <button id='inport'>写真データをインポートする</button>
+     <br>
+     <textarea id='inport_area' placeholder="ここにデータを貼り付けます"></textarea>
+     <br>
+     <br>
+     </div>
+     <div class="index" id="i1">写真の整理</div>
+     <div class="main" id="m1" style="display: none">
+     <br>
+     ごちそうタグを選択して写真を検索　<select id="griddles_select"></select>
+     <!--a id="cgdr">Google ドライブに保存する</a-->
+       <br><br>
+       <div ng-controller='setter' id='itemArea'>
+         <div class="itemRoop" ng-repeat='photo in photos' ng-init="photos = []" style='display: block'>
+         <!-- アイテムパネル -->
+           <div id='waku_{{photo.web}}' class='itemPanel'>
+               <a href="{{photo.page}}" target="_blank">
+                  <img ng-src='{{photo.web}}' class='list_img' id="img_{{photo.web}}" width="96" height="96" align="left">
+               </a>
+               
+               　<input type="text" value="" placeholder="取得中..." id="i_{{photo.web}}" class="taginput"><button id="s_{{photo.web}}" name="{{photo.page}}">登録</button>
+               <button name='{{photo.web}}' class="B" id="r_{{photo.web}}">削除</button>
+               <div id="g-d-btn-{{photo.time}}" data-page="{{photo.page}}" data-src="{{photo.web}}" class="g-d-btn">
+                  <div id="savetodrive-div-{{photo.time}}">
+                     <a id="cgdr-{{photo.time}}" name="{{photo.time}}" class="cgdr">more</a><!--Google ドライブに保存する-->
+                  </div>
+               </div>
+               <br clear="left">
+               <hr>
+           </div>
+         <!-- 繰り返し要素終了 -->
+         </div>
+       </div>
+     </div>
+     <div class="index" id="i3">Credits</div>
+     <div class="main" id="m3" style="display: none">
+<h3>AngularJS</h3>
+<blockquote>
+
+ AngularJS v1.0.7<br>
+ (c) 2010-2012 Google, Inc. http://angularjs.org<br>
+ License: MIT
+
+</blockquote>
+             
+<h3>localStore (waffle)</h3>
+<blockquote>
+ waffle<br>
+ (c) 2013 daiz.<br>
+ License: MIT
+</blockquote>
+             
+
+
+ <h3>jQuery</h3>
+<blockquote>
+
+Copyright 2013 jQuery Foundation and other contributors<br>
+http://jquery.com/<br><br>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:<br><br>
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.<br><br>
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+</blockquote>                 
+     </div>
+     <br>
+     <br>
+   </div>
+   </center>  
+   </body>
+   <script src="options.js"></script>
+   <script src = "build.js"></script>
+</html>
