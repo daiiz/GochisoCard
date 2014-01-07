@@ -1,0 +1,12 @@
+﻿.AppBar {
+background-color: #33251A;
+color: #fff;
+}
+
+.pic {
+padding: 2px;
+-webkit-border-radius: 3px;
+border-radius: 3px;
+width: 254px;
+height: 254px;
+}

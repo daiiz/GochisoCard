@@ -14,11 +14,11 @@ popupdata.g_drive_src = "";
 
 
 function openGochiphoto() {
-   chrome.tabs.create({url: "http://www.gochisophoto.com/"}, null);
+   chrome.tabs.create({url: "http://www.gochisophoto.com/"}, null);//http://www.gochisophoto.com/
 }
 
 function openCard() {
-   chrome.tabs.create({url: "ham/gochiso-card.html"}, function() {
+   chrome.tabs.create({url: "griddles/main.html"}, function() {
        window.close();
    });
 }
