@@ -38,23 +38,6 @@ photo_div.innerHTML = "";
 layout.cards = [];
 // # 返されたJSONから取得した画像を表示するコード
  for(C = 0; C < xs.length; C++) {
-    // # div#stageに
-    // <div class="card photo" id="order"><img src="any.png" class="this_is_a_photo" data-page="url" id="order"></div>
-    // を追加する
-    /*
-    var div = document.createElement("div");
-    div.className = "card photo";
-    div.id = "card_" + C;
-    photo_div.appendChild(div);
-    
-    div = document.getElementById("card_" + C);
-    var img = document.createElement("img");
-    img.className = "this_is_a_photo";
-    img.src = item[xs[C]].web;
-    img.id = "photo_" + C;
-    img.dataset.page = item[xs[C]].page;
-    div.appendChild(img);
-    */
     var itemJson = {"id": "", "type": "img", "dataset": [], "init": ""};
     itemJson.id = item[xs[C]].page;//"card_" + C;
     itemJson.init = item[xs[C]].web;
