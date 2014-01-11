@@ -7,7 +7,7 @@
    "card_margin_bottom": 14,
    "stream_margin_left_px": 7,
    "stream_margin_right_px": 7,
-   "available_width": 0.80,
+   "available_width": 0.85,
    "cards": [
    ]
 };
