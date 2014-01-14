@@ -1,0 +1,13 @@
+﻿@font-face {
+    font-family: 'Open Sans';
+    src: url('font/OpenSans-Light.ttf') format('truetype');
+}
+
+.AppBar {
+background-color: #33251A !important;
+color: #fff !important;
+}
+
+.Card {
+  cursor: pointer;
+}

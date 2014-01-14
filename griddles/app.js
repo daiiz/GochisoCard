@@ -7,7 +7,7 @@ function addSelectBox(all_query) {
       }
    }
    all_query.unshift("ごちそう");
-   var sbx = document.getElementById("griddles_select");
+   var sbx = document.getElementById("select_menu");
      for(i = 0; i < all_query.length; i++) {
          //console.log("sbx: %d", i);
          var option = document.createElement("option");
@@ -16,7 +16,7 @@ function addSelectBox(all_query) {
          option.appendChild(tit);
          sbx.appendChild(option);
      }
-   document.getElementById("griddles_select").addEventListener("change", requestQuery, false);
+   document.getElementById("select_menu").addEventListener("change", requestQuery, false);
 }
 
 // # 画像一覧を表示する（初回）
@@ -33,26 +33,20 @@ renderer_photo(item, xs);
 function renderer_photo(item, xs) {
 console.log(item);
 if(xs != undefined) {
-photo_div = document.getElementById("photo_stream");
+photo_div = document.getElementById("stage");
 photo_div.innerHTML = "";
+griddles.layout.cards = [];
 // # 返されたJSONから取得した画像を表示するコード
  for(C = 0; C < xs.length; C++) {
-    // # div#photo_streamに
-    // <div class="card photo" id="order"><img src="any.png" class="this_is_a_photo" data-page="url" id="order"></div>
-    // を追加する
-    var div = document.createElement("div");
-    div.className = "card photo";
-    div.id = "card_" + C;
-    photo_div.appendChild(div);
-    
-    div = document.getElementById("card_" + C);
-    var img = document.createElement("img");
-    img.className = "this_is_a_photo";
-    img.src = item[xs[C]].web;
-    img.id = "photo_" + C;
-    img.dataset.page = item[xs[C]].page;
-    div.appendChild(img);
+    var itemJson = {"id": "C" + C, "type": "user-img", "dataset": [], "init": ""};
+    //itemJson.dataset.page = item[xs[C]].page;//"card_" + C;
+    itemJson.dataset.push(["page" , item[xs[C]].page]);
+    itemJson.init = item[xs[C]].web;
+    griddles.layout.cards.push(itemJson);
  }
+ console.log(griddles.layout.cards);
+ griddles.render = true;
+ griddles.load();
 }
 }
 
@@ -73,10 +67,11 @@ function requestQuery(e) {
 }
 
 // # 写真をクリックされたときに実行する
-function visitPage(e) {
-   if(e.target.className == "this_is_a_photo" || e.target.className == "photo") {
-      var page = e.target.dataset.page;
-      chrome.tabs.create({url: page}, null);
+function visitPage(j) {
+   if(j.className == "img") {
+       var page = j.dataset.page;
+       console.log(page);
+       chrome.tabs.create({url: page}, null);
    }
 }
 
@@ -86,5 +81,4 @@ function loadend() {
 }
 
 window.addEventListener("load", loadend, false);
-document.getElementById("photo_stream").addEventListener("click", visitPage, false);
 document.getElementById("app_icon").addEventListener("click", showAll, false);

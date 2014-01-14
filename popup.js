@@ -18,7 +18,7 @@ function openGochiphoto() {
 }
 
 function openCard() {
-   chrome.tabs.create({url: "griddles/main.html"}, function() {
+   chrome.tabs.create({url: "griddles/index.html"}, function() {
        window.close();
    });
 }
