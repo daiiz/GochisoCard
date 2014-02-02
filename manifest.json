@@ -7,7 +7,7 @@
          "19": "images/128x128.png",
          "38": "images/128x128.png"
       },
-      "default_popup": "popup.html",
+      "default_popup": "new_popup.html",
       "default_title": "ごちそうカード に登録"
    },
    "options_page": "options.html",
@@ -27,6 +27,6 @@
       "run_at": "document_end"
     }
    ],
-   "permissions": ["storage", "http://*/*", "https://*/*", "tabs"],
-   "version": "0.3.31"
+   "permissions": ["storage", "http://*/*", "https://*/*", "tabs", "contextMenus", "notifications"],
+   "version": "0.4.1"
 }

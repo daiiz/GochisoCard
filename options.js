@@ -153,6 +153,8 @@ function setYtag(jn) {
       }
    }
    // ys.unshift("ごちそう");
+   url = url.replace(/=s[0-9][0-9][0-9]/gi, "");
+   console.log(url);
    if(ys.toString() == "") {
      document.getElementById("i_" + url).placeholder = "未登録です";
    }else {

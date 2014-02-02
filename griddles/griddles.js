@@ -12,7 +12,7 @@ griddles.layout = {
     "app_name": "gochiso card",
     "app_icon": "GochisoCard_v2.png",
     "card_width_px": 260,
-    "card_height_px": 260, 
+    "card_height_px": "auto",//260, 
     "card_margin_bottom": 14,
     "stream_margin_left_px": 7,
     "stream_margin_right_px": 7,
@@ -139,7 +139,7 @@ griddles.renderCards = function(n) {
             var hh = griddles.layout.card_width_px - 6;
             switch (type) {
                 case "user-img":
-                    init = "<img src='" + init + "' style='width:" + ww + "px!important;height:" + hh + "px!important;' class='img' id='" + id + "' " + dsr + ">";
+                    init = "<img src='" + init + "' style='width:" + ww + "px!important;' class='img' id='" + id + "' " + dsr + ">";
                     id = "";
                     card_id = 'id="card_' + y + '"';
                     dsr = "";

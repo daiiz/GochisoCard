@@ -78,6 +78,9 @@ miilplus.temp.pageURL = "";
       
    }else if(request.action == "remove_photo") {
       ys = waffle.get_relation_ys(request.unique_key);   // 仕様変更によりys === {x: "", ys: []}
+      if((ys.ys).length == 0) {
+         ys.ys.push("ごちそう");
+      }
       waffle.minus({x: request.unique_key, y: ys.ys});
       callback();
       
@@ -129,6 +132,63 @@ function encode_unique_key(fullurl) {
 function decode_unique_key(fullukey) {
    return null
 }
+
+/* contextMenus 対応 */
+
+var ctxmenu = {
+   icon: "griddles/ic_launcher.png",
+   thumbnail: "",
+   add_photo: function(j, cb) {
+      griddles.v3.msgCallback = cb;
+      var url = j.url;
+      griddles.v3.tag_array = j.tag;
+      uniqueKey = encode_unique_key(url);
+      miilplus.temp.uniqueKey = uniqueKey;
+      if(j.page_url == "NOT_MIIL_PAGE") {
+         miilplus.temp.pageURL = url;
+      }else {
+         miilplus.temp.pageURL = j.page_url;
+      }
+      miilplus.getJSON(url, ctxmenu.save);
+   },
+   genericOnClick: function(ocd) {
+       var pageUrl = ocd.pageUrl;
+       var srcUrl = ocd.srcUrl;
+      if(pageUrl.search(/^http/) != -1) {
+       var is_data = srcUrl.search(/^data/);
+       var is_http = srcUrl.search(/^http/);
+       if(is_data != -1 || is_http != -1) {
+          ctxmenu.thumbnail = srcUrl;
+          ctxmenu.add_photo({action: "add_photo", url: srcUrl, tag: [], page_url: pageUrl}, ctxmenu.addEnd);
+          console.log("OCD: ['" + pageUrl + "', '" + srcUrl + "']");
+       }
+      }else {
+          console.log(pageUrl);
+      }
+   },
+   addEnd: function() {
+       chrome.notifications.clear("saved", function() {
+           var notificationId = "saved";
+           var options = {type: "basic", title: "ごちそうカード に写真を登録しました", message: "既に同一の写真が登録されている場合、タグはリセットされます。", iconUrl: ctxmenu.thumbnail};
+           chrome.notifications.create(notificationId, options, function(){})
+       });
+   },
+   save :function(j) {
+       console.log("func:save");
+       griddles.v3.tag_array.push(griddles.v3.common_key);
+       if(miilplus.temp.uniqueKey.search(/=s[0-9][0-9][0-9]/) != -1) {
+          miilplus.temp.uniqueKey = miilplus.temp.uniqueKey.replace(/=s[0-9][0-9][0-9]/gi, "");
+       }  
+       var _x_ = miilplus.temp.uniqueKey;
+       var _y_ = griddles.v3.tag_array;
+       console.log(_x_);
+       console.log(_y_);
+       waffle.set({x: _x_, y: _y_}, j);
+       griddles.v3.msgCallback();
+   }
+};
+var contextMenus_parent = chrome.contextMenus.create({"id": "gochisocard", "title": "ごちそうカード に写真を登録", "contexts": ["image"], "onclick": ctxmenu.genericOnClick});
+
 
 // content_scripts での sendRequest を受信
 chrome.extension.onRequest.addListener(getMessages);
