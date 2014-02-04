@@ -8,7 +8,7 @@
          "38": "images/128x128.png"
       },
       "default_popup": "new_popup.html",
-      "default_title": "ごちそうカード に登録"
+      "default_title": "ごちそうカード"
    },
    "options_page": "options.html",
    "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com/; object-src 'self'",
@@ -28,5 +28,5 @@
     }
    ],
    "permissions": ["storage", "http://*/*", "https://*/*", "tabs", "contextMenus", "notifications"],
-   "version": "0.4.1"
+   "version": "0.4.3"
 }
