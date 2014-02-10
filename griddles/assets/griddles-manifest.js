@@ -32,4 +32,5 @@ griddles.layout = {
 
 griddles.layout.cardOnClick = function(j) {
     console.log(j);
+    visitPage(j);
 }
