@@ -50,6 +50,7 @@ griddles.layout.cards = [];
 }
 }
 
+var SCL = 0;
 // # "すべて"専用
 function showAll() {
     /*
@@ -57,10 +58,17 @@ function showAll() {
     console.log("req_q: %s", query);
     chrome.extension.sendRequest({action: "at_miil_user_page", query: query}, renderer);
     */
-    window.location.reload();
+    //window.location.reload();
+    if(SCL == 0) {
+       pageScroll();
+    }else {
+       SCL = 0;
+       clearTimeout(rep);
+    }
 }
 // # セレクトボックスの変更に応答する
 function requestQuery(e) {
+    pageScrollStop();
     query = document.getElementById(e.target.id).value;
     console.log("req_q: %s", query);
     chrome.extension.sendRequest({action: "at_miil_user_page", query: query}, renderer);
@@ -80,5 +88,38 @@ function loadend() {
    chrome.extension.sendRequest({action: "add_select_box", query: "all"}, addSelectBox);
 }
 
+/* ウィンドウの自動スクロール */
+var rep;
+var x = 0;
+var y = 0;
+var nx = 0;
+var ny = 0;
+function pageScroll() {
+ SCL = 1;
+ var tim = 1;
+ var move = 1;
+	window.scrollBy(0, move);
+	rep = setTimeout(pageScroll, tim);
+	if(document.all){
+		  x = document.body.scrollLeft;
+		  y = document.body.scrollTop;
+	} else if(document.layers || document.getElementById){
+		  x = pageXOffset;
+		  y = pageYOffset;
+	}
+	if(nx == x && ny == y){
+		  pageScrollStop();
+	} else{
+		  nx = x;
+		  ny = y;
+	}
+}
+
+function pageScrollStop() {
+    SCL = 0;
+    clearTimeout(rep);
+}
+
 window.addEventListener("load", loadend, false);
+window.addEventListener("resize", pageScrollStop, false);
 document.getElementById("app_icon").addEventListener("click", showAll, false);
