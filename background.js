@@ -138,6 +138,7 @@ function decode_unique_key(fullukey) {
 var ctxmenu = {
    icon: "griddles/ic_launcher.png",
    thumbnail: "",
+   pgURL: "",
    add_photo: function(j, cb) {
       griddles.v3.msgCallback = cb;
       var url = j.url;
@@ -159,18 +160,20 @@ var ctxmenu = {
        var is_http = srcUrl.search(/^http/);
        if(is_data != -1 || is_http != -1) {
           ctxmenu.thumbnail = srcUrl;
+          ctxmenu.pgURL = pageUrl;
           ctxmenu.add_photo({action: "add_photo", url: srcUrl, tag: [], page_url: pageUrl}, ctxmenu.addEnd);
           console.log("OCD: ['" + pageUrl + "', '" + srcUrl + "']");
        }
       }else {
-          console.log(pageUrl);
+          console.log(ocd);
       }
    },
    addEnd: function() {
        chrome.notifications.clear("saved", function() {
            var notificationId = "saved";
-           var options = {type: "basic", title: "ごちそうカード に写真を登録しました", message: "既に同一の写真が登録されている場合、タグはリセットされます。", iconUrl: ctxmenu.thumbnail};
-           chrome.notifications.create(notificationId, options, function(){})
+           var mmg = "既に同一の写真が登録されている場合、タグはリセットされます。";
+           var options = {type: "basic", title: "登録完了", message: mmg, iconUrl: ctxmenu.thumbnail};
+           chrome.notifications.create(notificationId, options, function(){});
        });
    },
    save :function(j) {

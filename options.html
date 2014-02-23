@@ -98,24 +98,16 @@
    <br>
    <center>
    <div id='panel'>
-     <div class="index" id="i0">ユーザー設定</div>
-     <div class="main" id="m0" style="display: none">
-       <br>
-       ミイル(miil)で使用しているユーザー名: <input type="text" placeholder="取得中..." id='usrname_box'>
-       <button id='usrname_btn'>登録</button><button id='open_miil_page'>ミイルのページを開く</button>
-       <br>
-       <br>
-     </div>
      <div class="index" id="i2">マイデータ</div>
      <div class="main" id="m2" style="display: none">
      <br>
-     GochisoCardでは、登録していただいた写真データ（URL、ごちそうタグ）をインポート/エクスポートすることができます。データのバックアップにご利用下さい。<!--br>
-     <a href="" target="_blank">GochisoView</a> を使うと、エクスポートされたデータを貼り付けるだけで、スマートフォンでもごちそうカードを見ることができます。-->
+     GochisoCardでは、登録していただいた写真データ（URL、ごちそうタグ）をインポート/エクスポートすることができます。データのバックアップにご利用下さい。<br>
+     <a href="https://sites.google.com/site/mobiledaiz/gochisocard" target="_blank">ごちそうカード モバイル</a> を使うと、エクスポートされたデータを貼り付けるだけで、スマートフォンでもごちそうカードを見ることができます。
      <br>
      <br>
      <span class="port">エクスポート</span>
      <br>
-     GochisoCardに保存されている全ての写真のURLを、ごちそうタグとともにエクスポートします。エクスポートされたデータには、GochisoCardに登録していただいたユーザー名は含まれません。
+     GochisoCardに保存されている全ての写真のURLを、ごちそうタグとともにエクスポートします。
      <br>
      <br>
      <button id='export'>写真データをエクスポートする</button>　<input type='checkbox' id='q_rm'>エクスポート終了後に、GochisoCardに保存されているデータを全て削除する
@@ -149,12 +141,16 @@
                </a>
                
                　<input type="text" value="" placeholder="取得中..." id="i_{{photo.web}}" class="taginput"><button id="s_{{photo.web}}" name="{{photo.page}}">登録</button>
-               <button name='{{photo.web}}' class="B" id="r_{{photo.web}}">削除</button>
+               <button name='{{photo.web}}' class="B" id="r_{{photo.web}}">削除</button><br>
+               <!-- ツイートボタン -->
+                <button name='{{photo.page}}' id="w_{{photo.web}}" style='margin-left: 14px;'>ページをツイート</button>
+               <!-- ツイートボタンここまで -->
                <div id="g-d-btn-{{photo.time}}" data-page="{{photo.page}}" data-src="{{photo.web}}" class="g-d-btn">
                   <div id="savetodrive-div-{{photo.time}}">
-                     <a id="cgdr-{{photo.time}}" name="{{photo.time}}" class="cgdr">more</a><!--Google ドライブに保存する-->
+                     <a id="cgdr-{{photo.time}}" name="{{photo.time}}" class="cgdr" style="display:none">more</a><!--Google ドライブに保存する-->
                   </div>
                </div>
+
                <br clear="left">
                <hr>
            </div>
