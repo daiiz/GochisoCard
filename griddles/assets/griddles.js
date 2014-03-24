@@ -458,7 +458,7 @@ $(window).resize("resize", function() {
 $(window).on("scroll", function() {
     var sh = $(document).height();
     var sp = $(window).height() + $(window).scrollTop();
-    if (((sh - sp) / sh) === 0) {
+    if (((sh - sp) / sh) == 0) {
         // スクロールによってページの下部に到達した場合
         // console.log(griddles.keepContentsNo_y);
         if ((griddles.keepContentsNo_y + 1) < griddles.layout.cards.length) {
