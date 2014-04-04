@@ -4,7 +4,7 @@
  */
 
 .user-appbar {
-    background-color: #fff;
+    /*background-color: #fff;*/
     color: #000;
 }
 
@@ -58,7 +58,7 @@ body {
     border-right-width: 0px;
     cursor: default;
     font-family: 'Open Sans', sans-serif, Meiryo;
-    border-bottom-width: 0px !important;
+    border-bottom-width: 0px ; /*独自仕様*/
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     -webkit-border-radius: 0px !important;
 }
