@@ -402,8 +402,8 @@ griddles.clicked = function(e) {
         if (griddles.phonegap == true) {
             // phonegapアプリに対応
             // タブレット用のおすすめデザインに書き換え
-            d.getElementsByClassName("AppBar")[0].style.height = "55px";
-            d.getElementsByClassName("AppIconArea")[0].style.marginTop = "3px";
+            d.getElementsByClassName("AppBar")[0].style.height = "58px";
+            d.getElementsByClassName("AppIconArea")[0].style.marginTop = "5px";
             d.getElementsByClassName("AppIconArea")[0].style.marginLeft = "15px";
             d.getElementsByClassName("Icon")[0].style.cursor = "default";
             d.getElementById("stage").style.marginTop = "-8px";
@@ -458,7 +458,7 @@ $(window).resize("resize", function() {
 $(window).on("scroll", function() {
     var sh = $(document).height();
     var sp = $(window).height() + $(window).scrollTop();
-    if (((sh - sp) / sh) == 0) {
+    if (((sh - sp) / sh) === 0) {
         // スクロールによってページの下部に到達した場合
         // console.log(griddles.keepContentsNo_y);
         if ((griddles.keepContentsNo_y + 1) < griddles.layout.cards.length) {

@@ -4,8 +4,8 @@
    },
    "browser_action": {
       "default_icon": {
-         "19": "images/128x128.png",
-         "38": "images/128x128.png"
+         "19": "images/is.png",
+         "38": "images/is.png"
       },
       "default_popup": "new_popup.html",
       "default_title": "ごちそうカード"
@@ -14,9 +14,9 @@
    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
    "description": "ごちそう写真のコレクション",
    "icons": {
-      "128": "images/128x128.png",
-      "48": "images/48x48.png",
-      "16": "images/128x128.png"
+      "128": "images/il.png",
+      "48": "images/il.png",
+      "16": "images/il.png"
    },
    "manifest_version": 2,
    "name": "ごちそうカード",

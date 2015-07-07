@@ -190,14 +190,8 @@ var ctxmenu = {
        griddles.v3.msgCallback();
    }
 };
-var contextMenus_parent;
-ctx_menu = function() {
-   var pf = "";
-   if(dev_chanel == 1) {
-       pf = " [dev]";
-   }
-   contextMenus_parent = chrome.contextMenus.create({"id": "gochisocard", "title": "ごちそうカード に写真を登録"+ pf, "contexts": ["image"], "onclick": ctxmenu.genericOnClick});
-}();
+var contextMenus_parent = chrome.contextMenus.create({"id": "gochisocard", "title": "ごちそうカード に写真を登録", "contexts": ["image"], "onclick": ctxmenu.genericOnClick});
+
 
 // content_scripts での sendRequest を受信
 chrome.extension.onRequest.addListener(getMessages);
